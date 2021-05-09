@@ -1,14 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log(window);
+    //Constantes
+    const MARGIN = 0.02; //Valor para fraccionar
+    //Tomo el canvas
     let canvas = document.getElementById('canvas');
-    canvas.width = window.innerWidth - 30;
-    canvas.height = window.innerHeight - 30;
     let ctx = canvas.getContext('2d');
+    //Armo filas y columnas para el tablero
     let columnas = 6;
     let filas = 5;
+    //Dimensiones del canvas
+    let width, height, margin;
+    //Variable del juego
+    let fourInLine;
 
-    let fourInLine = new Game(ctx, canvas.width, canvas.height, columnas, filas);
-    fourInLine.draw();
+    let setDimensions = () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        margin = MARGIN * Math.min(height, width);
+        nuevoJuego();
+    }
+
+    let nuevoJuego = () => {
+        //Creo una instancia del juego
+        fourInLine = new Game(ctx, width, height, margin, columnas, filas);
+        fourInLine.newGame();
+    }
 
     canvas.addEventListener('mousedown', (eMouseDown) => {
         if (fourInLine.checkHit(eMouseDown.offsetX, eMouseDown.offsetY)) {
@@ -17,12 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+
     canvas.addEventListener('mouseup', (eMouseUp) => {
         canvas.removeEventListener('mousemove', fourInLine.handleDrag);
         fourInLine.stopDragging();
     })
 
-    document.querySelector("#cantColumnas").addEventListener("change", (e) => {
+    /* document.querySelector("#cantColumnas").addEventListener("change", (e) => {
         columnas = e.target.value;
     })
 
@@ -36,5 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             alert("Las filas y/o las columnas deben tener un valor mayor o igual a 4");
         }
-    })
+    }) */
+
+    //Llamados de funciones iniciales
+    setDimensions();
+    //Redimension
+    window.addEventListener("resize", setDimensions);
 })
