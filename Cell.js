@@ -21,13 +21,18 @@ class Cell {
         this.highlight = null;
         this.owner = null;
         this.winner = false;
+        this.blankSpace = null;
     }
 
     contains(x, y) {
         return x > this.left && x < this.right && y > this.top && y < this.bot;
     }
 
-    // draw the circle or hole
+    newHitBox(hitBox) {
+        this.blankSpace = hitBox;
+    }
+
+    // Dibuja el circulo o "espacio para la ficha"
     draw(ctx) {
         // Color del jugador
         let color = this.owner == null ? BACK_COLOR : this.owner ? COLOR_PLAY : COLOR_COMP;

@@ -1,3 +1,6 @@
+let timeDelta, timeLast;
+let gameOver, playerTurn;
+
 class Game {
     constructor(context, width, height, margin, columnas, filas) {
         this.context = context;
@@ -8,22 +11,22 @@ class Game {
         this.height = height;
         this.margin = margin;
         this.columnas = columnas;
-        this.filas = filas
+        this.filas = filas;
     }
 
     newGame() {
+        playerTurn = true;
         this.draw();
-        this.board.draw(this.columnas, this.filas);
-        this.board.createGrid();
     }
 
     draw() {
         this.context.clearRect(0, 0, this.width, this.height);
-        this.board.draw(this.columnas, this.filas);
         this.board.createGrid();
+        this.board.draw(this.columnas, this.filas);
     }
-    checkHit(clickedX, clickedY) {
-        let selectedChip = this.board.getSelectedChip(clickedX, clickedY);
+
+    checkHit(posX, posY) {
+        let selectedChip = this.board.getSelectedChip(posX, posY);
         if (selectedChip) {
             this.mode = 'dragging';
             this.selectedChip = selectedChip;
@@ -31,20 +34,24 @@ class Game {
         }
         return false;
     }
-    handleDrag(clickedX, clickedY) {
+
+    handleDrag(posX, posY) {
         if (this.mode === 'dragging' && this.selectedChip) {
-            this.selectedChip.move(clickedX, clickedY);
+            this.selectedChip.move(posX, posY);
             this.draw();
         }
     }
+
     stopDragging() {
+        if (this.mode === 'dragging') {
+            this.checkMove();
+        }
         this.mode = 'standBy';
     }
 
     checkMove() {
         if (this.board.checkMove(this.selectedChip)) {
-
+            this.draw();
         }
     }
-
 }

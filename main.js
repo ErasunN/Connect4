@@ -5,12 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
     //Armo filas y columnas para el tablero
-    let columnas = 6;
-    let filas = 5;
+    let columnas = 7;
+    let filas = 6;
     //Dimensiones del canvas
     let width, height, margin;
     //Variable del juego
     let fourInLine;
+    let activePlayer;
 
     let setDimensions = () => {
         width = window.innerWidth;
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fourInLine.stopDragging();
     })
 
-    /* document.querySelector("#cantColumnas").addEventListener("change", (e) => {
+    document.querySelector("#cantColumnas").addEventListener("change", (e) => {
         columnas = e.target.value;
     })
 
@@ -50,11 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelector("#setSize").addEventListener("click", () => {
         if (filas >= 4 && columnas >= 4) {
-            fourInLine = new Game(ctx, canvas.width, canvas.height, columnas, filas);
+            nuevoJuego();
         } else {
             alert("Las filas y/o las columnas deben tener un valor mayor o igual a 4");
         }
-    }) */
+    })
 
     //Llamados de funciones iniciales
     setDimensions();
