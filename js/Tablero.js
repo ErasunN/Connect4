@@ -21,6 +21,7 @@ class Tablero {
         this.showTurn();
     }
 
+    //Dibuja un marcador para el jugador que tiene el turno
     showTurn() {
         if (this.firstTurn) {
             this.firstTurn = !this.firstTurn;
@@ -50,6 +51,7 @@ class Tablero {
         return this.turnoActivo;
     }
 
+    //Carga las imagenes para las fichas
     loadImagePlayer(player) {
         var img = new Image();
         img.src = './image/player' + player + '.png';
@@ -64,6 +66,7 @@ class Tablero {
         }
     }
 
+    //Dibuja el tablero
     draw() {
         this.espacios.forEach(espacio => {
             espacio.forEach(espaci => {
@@ -85,6 +88,7 @@ class Tablero {
 
     }
 
+    //Selecciona la ficha clickeada en la posicion
     getSelectedChip(posX, posY) {
         if (this.turnoActivo) {
             for (let i = 0; i < this.player1.length; i++) {
@@ -102,6 +106,7 @@ class Tablero {
         return null;
     }
 
+    //Verificacion de movimiento de la ficha
     checkMove(ficha) {
         if (!ficha.isBloqued && ficha.posX > this.espacios[0][0].posX && ficha.posX < this.espacios[this.filas - 1][this.columnas - 1].posX + this.espacios[this.filas - 1][this.columnas - 1].width) {
             let fichaX = ficha.getPosX();
@@ -110,6 +115,7 @@ class Tablero {
             this.moveChip(x, y, ficha)
             ficha.isBloqued = true;
             this.turnoActivo = !this.turnoActivo;
+            //Retorna posicion "x" e "y" mas datos de utilidad
             return {
                 x,
                 y,
@@ -119,6 +125,7 @@ class Tablero {
         }
     }
 
+    //Bloquea el movimiento de las fichas
     bloquearFichas() {
         this.player1.forEach(ficha => {
             ficha.isBloqued = true
@@ -128,6 +135,7 @@ class Tablero {
         })
     }
 
+    //Mueve la ficha a la celda disponible del tablero
     moveChip(columna, fila, ficha) {
         this.espacios[fila][columna].estado = "ocupado";
         if (this.turnoActivo) {
@@ -140,6 +148,7 @@ class Tablero {
         ficha.move(posX, posY);
     }
 
+    //Busca la fila con una celda disponible en "index"
     getRowAvailable(index) {
         let contador = this.espacios.length - 1
         let retorned;
@@ -153,6 +162,7 @@ class Tablero {
         }
     }
 
+    //Retorna la posicion de la columna donde solte la ficha
     getColSelected(posX) {
         for (let i = 0; i <= this.espacios.length; i++) {
             if (posX >= this.espacios[0][i].posX && posX <= this.espacios[0][i].posX + this.espacios[0][i].width) {
@@ -161,6 +171,7 @@ class Tablero {
         }
     }
 
+    //Crea una hitbox para las celdas
     createHitBox() {
         for (let y = 0; y < this.filas; y++) {
             for (let x = 0; x < this.columnas; x++) {
@@ -180,6 +191,7 @@ class Tablero {
         }
     }
 
+    //Verifica si hay un ganador
     checkWin(fila, columna) {
         if (this.gameover == false) {
             let horizontal = []
@@ -206,6 +218,7 @@ class Tablero {
         }
     }
 
+    //Verifica si hay una secuencia de fichas ganadoras
     cuatroEnLinea(celda = []) {
         let count = 0;
         let jugadorActivo;

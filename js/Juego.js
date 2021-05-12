@@ -10,16 +10,19 @@ class Juego {
 
     }
 
+    //Se verifica si el juego esta finalizado
     getGameOver() {
         return this.gameover;
     }
 
+    //Dibuja el tablero y el turno del jugador
     draw() {
         this.ctx.clearRect(0, 0, this.width, this.height);
         this.tablero.draw();
         this.showTurn();
     }
 
+    //Obtiene la ficha "golpeada"
     checkHit(posX, posY) {
         let selectedChip = this.tablero.getSelectedChip(posX, posY);
         if (selectedChip) {
@@ -30,6 +33,7 @@ class Juego {
         return false;
     }
 
+    //Mueve la ficha de posicion
     handleDrag(posX, posY) {
         if (this.mode === 'dragging' && this.selectedChip && this.gameover == false) {
             this.selectedChip.move(posX, posY);
@@ -37,6 +41,7 @@ class Juego {
         }
     }
 
+    //Deja de mover la ficha
     stopDragging() {
         if (this.mode === 'dragging') {
             this.checkMove();
@@ -44,6 +49,7 @@ class Juego {
         this.mode = 'standBy';
     }
 
+    //Verifica el movimiento y redibuja
     checkMove() {
         let checkMove = this.tablero.checkMove(this.selectedChip);
         if (checkMove) {
@@ -56,6 +62,7 @@ class Juego {
         }
     }
 
+    //Muestra el mensaje con el ganador
     showWinner(numero) {
         let ganador = document.getElementById("winnerModal");
         if (numero === 1) {
@@ -67,6 +74,7 @@ class Juego {
         modal.toggle();
     }
 
+    //Muestra el turno del jugador
     showTurn() {
         this.tablero.showTurn();
     }

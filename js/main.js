@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let juego;
 
+    //Movimiento de las fichas
     canvas.addEventListener("mousedown", (eMouseDown) => {
         if (juego.checkHit(eMouseDown.offsetX, eMouseDown.offsetY)) {
             canvas.addEventListener("mousemove", (eMouseMove) => {
@@ -23,20 +24,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    //Dropeo de las fichas
     canvas.addEventListener("mouseup", (eMouseUp) => {
         canvas.removeEventListener("mousemove", juego.handleDrag);
         juego.stopDragging();
     });
 
-
-
+    //Nueva instancia del juego
     nuevojuego = (col, fil, width, height) => {
         juego = new Juego(ctx, width, height, col, fil);
         juego.draw();
     }
 
+    //Inicio del juego
     nuevojuego(columnas, filas, baseWidth, baseHeight);
+
+    //Modificacion de la cantidad de filas y columnas del tablero
     modificar.addEventListener("click", () => {
+        //Se limitan la cantidad de filas y columnas permitidas para que no resulte incomodo de jugar
         if (cantColumnas.value != "" && cantColumnas.value >= 4 && cantColumnas.value <= 12) {
             if (cantFilas.value != "" && cantFilas.value >= 4 && cantFilas.value <= 12) {
                 col = cantColumnas.value;
@@ -56,14 +61,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    //Reset del juego
     reset.addEventListener("click", () => {
         resetGame();
     });
 
+    //Reset del juego cuando se termino (hubo un ganador)
     playAgain.addEventListener("click", () => {
         resetGame();
     });
 
+    //Funcion de reseteo del juego
     resetGame = () => {
         canvas.width = baseWidth;
         canvas.height = baseHeight;
