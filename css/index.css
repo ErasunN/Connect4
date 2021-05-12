@@ -1,0 +1,18 @@
+#light-back {
+    background-color: mediumaquamarine;
+}
+
+body {
+    margin: 0%;
+    background-color: black;
+}
+
+canvas {
+    background-color: mediumaquamarine;
+    display: block;
+    position: initial;
+}
+
+.hidden {
+    display: none;
+}

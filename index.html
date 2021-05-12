@@ -5,22 +5,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
 </head>
 
 <body>
-    <div>
-        <label>Cant Columnas: <input type="number" id="cantColumnas"></label>
-        <label>Cant Filas: <input type="number" id="cantFilas"></label>
-        <button id="setSize">Cambiar Tamanio</button>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container-fluid">
+            <p class="navbar-brand my-md-auto">Nicolas Erasun</p>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item text-white">
+                        Interfaces - Entregable 2
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input type="number" class="form-control me-2" id="columnas" placeholder="Cantidad de columnas">
+                    <input type="number" class="form-control me-2" id="filas" placeholder="Cantidad de filas">
+                    <input type="button" class="btn btn-success me-2" id="modifTablero" value="Cambio!">
+                    <input type="button" class="btn btn-info" id="reset" value="Volver a empezar!">
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <canvas id="canvasGame"></canvas>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Tenemos un ganador!</h5>
+                </div>
+                <div class="modal-body">
+                    El ganador es el jugador <span id="winnerModal"></span>!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="playAgain" class="btn btn-secondary" data-bs-dismiss="modal">Volver a jugar!</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <canvas id="canvas"></canvas>
-    <script src="Game.js"></script>
-    <script src="Board.js"></script>
-    <script src="Chip.js"></script>
-    <script src="Cell.js"></script>
-    <script src="main.js"></script>
+
+    <script src="./js/Juego.js "></script>
+    <script src="./js/Tablero.js "></script>
+    <script src="./js/Ficha.js "></script>
+    <script src="./js/main.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
