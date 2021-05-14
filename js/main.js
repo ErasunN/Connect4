@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let modificar = document.getElementById("modifTablero");
     let reset = document.getElementById("reset");
     let playAgain = document.getElementById("playAgain");
-    let baseWidth = window.innerWidth;
-    let baseHeight = window.innerHeight;
+    let baseWidth = 1350;
+    let baseHeight = 700;
     canvas.width = baseWidth;
     canvas.height = baseHeight;
     let ctx = canvas.getContext("2d");
@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (cantFilas.value != "" && cantFilas.value >= 4 && cantFilas.value <= 12) {
                 col = cantColumnas.value;
                 fil = cantFilas.value;
-                canvas.width = baseWidth + ((baseWidth * col * 2) / 100);
-                canvas.height = baseHeight + ((baseHeight * fil * fil) / 100);
+                canvas.width = baseWidth + (baseWidth / col * 2);
+                canvas.height = baseHeight + (baseHeight / fil * col);
                 nuevojuego(col, fil, canvas.width, canvas.height);
             } else if (cantFilas.value <= 4) {
                 alert("Se insertaron pocas filas!");

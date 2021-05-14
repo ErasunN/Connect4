@@ -58,9 +58,9 @@ class Tablero {
         img.onload = () => {
             for (let i = 0; i < this.columnas * this.filas / 2; i++) {
                 if (player === 1) {
-                    this.player1.push(new Ficha(this.width * 0.1, this.height - this.height * 0.2, 46, img, this.ctx, 1));
+                    this.player1.push(new Ficha(this.width * 0.1, this.height - this.height * 0.3, 46, img, this.ctx, 1));
                 } else {
-                    this.player2.push(new Ficha(this.width - this.width * 0.1, this.height - this.height * 0.2, 46, img, this.ctx, ));
+                    this.player2.push(new Ficha(this.width - this.width * 0.1, this.height - this.height * 0.3, 46, img, this.ctx, ));
                 }
             }
         }
