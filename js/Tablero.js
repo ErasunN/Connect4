@@ -194,10 +194,11 @@ class Tablero {
     //Verifica si hay un ganador
     checkWin(fila, columna) {
         if (this.gameover == false) {
-            let horizontal = []
-            let vertical = []
-            let diagonalDerecha = []
-            let diagonalIzquierda = []
+            let tiedGame = 0;
+            let horizontal = [];
+            let vertical = [];
+            let diagonalDerecha = [];
+            let diagonalIzquierda = [];
             for (let i = 0; i < this.filas; i++) {
                 for (let j = 0; j < this.columnas; j++) {
                     if (i == fila) {
@@ -212,7 +213,13 @@ class Tablero {
                     if (i + j == fila + columna) {
                         diagonalDerecha.push(this.espacios[i][j]); //seteo diagonalDerecha
                     }
+                    if (this.espacios[i][j].estado === "ocupado") {
+                        tiedGame++;
+                    }
                 }
+            }
+            if (tiedGame === (this.filas * this.columnas)) {
+                return "tied";
             }
             return this.cuatroEnLinea(diagonalIzquierda) || this.cuatroEnLinea(diagonalDerecha) || this.cuatroEnLinea(horizontal) || this.cuatroEnLinea(vertical);
         }

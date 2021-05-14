@@ -57,6 +57,8 @@ class Juego {
             if (win.resultado) {
                 this.tablero.bloquearFichas();
                 this.showWinner(win.ganador);
+            } else if (win == "tied") {
+                this.showWinner(0);
             }
             this.draw();
         }
@@ -67,8 +69,13 @@ class Juego {
         let ganador = document.getElementById("winnerModal");
         if (numero === 1) {
             ganador.innerHTML = "azul";
-        } else {
+        } else if (numero === 2) {
             ganador.innerHTML = "rojo";
+        } else {
+            let title = document.getElementById("staticBackdropLabel");
+            title.innerHTML = "Empate!";
+            let text = document.getElementById("gameResult");
+            text.innerHTML = "Hubo un empate, mejor suerte la proxima!";
         }
         let modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
         modal.toggle();
